@@ -47,3 +47,18 @@ fn test_load_compress(){
     let load = load_compress("coba.lre");
     assert!(load.is_ok());
 }
+
+
+#[test]
+fn test_compress_file(){
+    use rust_compress_basic::compress_file;
+    let result = compress_file("hello.txt", "hello(1).lre");
+    assert!(result.is_ok());
+}
+
+#[test]
+fn test_decompress_file(){
+    use rust_compress_basic::decompress_file;
+    let result = decompress_file("hello(1).lre", "hello(2).txt");
+    assert!(result.is_ok());
+}

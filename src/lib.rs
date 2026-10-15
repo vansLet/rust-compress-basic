@@ -27,7 +27,7 @@ pub fn compress(data: &[u8]) -> Vec<(u8, u8)> {
 }
 
 pub fn save_compress(path: &str, data: &[(u8, u8)]) -> io::Result<()> {
-    let mut file = File::create(path)?;
+    let mut file = File::create_new(path)?;
     let mut buff = [0u8; 2];
     for &(counter, c) in data {
         buff[0] = counter;
@@ -84,4 +84,24 @@ pub fn load_compress(path: &str) -> io::Result<Vec<(u8, u8)>> {
         decode.push((buff[0], buff[1]));
     }
     Ok(decode)
+}
+
+
+pub fn compress_file(
+    src_path: &str,
+    output_path: &str
+) -> io::Result<()> {
+    let mut buff = Vec::new();
+    File::open(src_path)?.read_to_end(&mut buff)?;
+    let data_compress = compress(&buff);
+    save_compress(output_path, &data_compress)
+}
+
+pub fn decompress_file(
+    src_path: &str,
+    output_path: &str
+) -> io::Result<()> {
+    let data_compress = load_compress(src_path)?;
+    let data_decompress = decompress(&data_compress);
+    File::create_new(output_path)?.write_all(&data_decompress)
 }
