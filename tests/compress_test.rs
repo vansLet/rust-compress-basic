@@ -61,6 +61,9 @@ fn test_compress_file() {
 #[test]
 fn test_decompress_file() {
     use rust_compress_basic::decompress_file;
-    let result = decompress_file(&PathBuf::from("hello(1).lre"), &PathBuf::from("hello(2).txt"));
+    let result = decompress_file(
+        &PathBuf::from("hello(1).lre"),
+        &PathBuf::from("hello(2).txt"),
+    );
     assert!(result.is_ok());
 }

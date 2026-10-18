@@ -1,5 +1,8 @@
 use std::{
-    env, fs::File, io::{self, Read, Write}, path::{Path, PathBuf},
+    env,
+    fs::File,
+    io::{self, Read, Write},
+    path::{Path, PathBuf},
 };
 pub mod cli;
 pub mod encryption;

@@ -1,5 +1,7 @@
 use std::{
-    fs::File, io::{self, ErrorKind::UnexpectedEof, Read, Write}, path::Path,
+    fs::File,
+    io::{self, ErrorKind::UnexpectedEof, Read, Write},
+    path::Path,
 };
 
 const MAX_U8: usize = u8::MAX as usize;
