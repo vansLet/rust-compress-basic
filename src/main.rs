@@ -1,19 +1,9 @@
-use rust_compress_basic::{compress, decompress, load_compress, save_compress};
-
+use rust_compress_basic::{cli, compress_file, decompress_file};
 fn main() {
-    let original = vec![65, 65, 65, 66, 66, 67];
-
-    let compress = compress(&original);
-
-    // let decompress = decompress(&compress);
-
-    save_compress("coba.lre", &compress).unwrap();
-    let file_decompress = load_compress("coba.lre").unwrap();
-    let decompress = decompress(&file_decompress);
-
-
-
-    assert_eq!(original, decompress);
-
+    let cli = cli::CliArguments::new().unwrap();
+    match &cli.type_encrypt {
+        cli::OptionCommands::Compress => compress_file(&cli.from_path, &cli.to_path).unwrap(),
+        cli::OptionCommands::Decompress => decompress_file(&cli.from_path, &cli.to_path).unwrap()
+    }
+    return;
 }
-
